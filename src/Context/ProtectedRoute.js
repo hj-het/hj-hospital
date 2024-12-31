@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useContext } from "react";
+import { Navigate } from "react-router-dom";
+import { AuthContext } from "./AuthProvider";
 
-const ProtectedRoute = () => {
-  return (
-    <div>ProtectedRoute</div>
-  )
-}
+const ProtectedRoute = ({ children, allowedRoles }) => {
+    const { user } = useContext(AuthContext);
 
-export default ProtectedRoute
+    // Redirect if no user or role is not allowed
+    if (!user || (allowedRoles && !allowedRoles.includes(user.role))) {
+        return <Navigate to="/" />;
+    }
+
+    return children;
+};
+
+export default ProtectedRoute;

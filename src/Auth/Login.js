@@ -16,43 +16,42 @@ const Login = () => {
   const onSubmit = async (event) => {
     event.preventDefault();
     setLoading(true);
-
+  
     const payload = {
       Contact: contact,
       Password: password,
     };
-
+  
     try {
-      // Use the postRequest function to handle the API request
       const result = await postRequest("multilogin", payload);
-      console.log("result-->",result)
-      if (result.success) {
-        toast.success(result.message || "Invalid login credentials");
-        setLoading(false);
+      // console.log("result -->", result);
+  
+      // Check if the response contains the expected fields
+      if (result && result.data && result.message === "Login successful") {
+        const { Contact, Doctor_Login_Id, Role } = result.data;
+  
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ username: Contact, id: Doctor_Login_Id, role: Role })
+        );
+        
+  
+        auth.login({ username: Contact, id: Doctor_Login_Id, role: Role });
+  
+        toast.success("Login successful");
+  
         navigate("/dashboard");
-        return;
+      } else {
+        toast.error(result.message || "Invalid login credentials");
       }
-
-      // Assuming the API response has a 'data' object with 'contact' and 'id'
-      const { contact, id } = result.data;
-
-      // Store the user data in localStorage
-      localStorage.setItem("user", JSON.stringify({ username: contact, id }));
-
-      // Set login data in context if necessary
-      auth.login({ username: contact, id });
-
-      toast.success("Login successful");
-      setLoading(false);
-
-      // Redirect to dashboard after successful login
-      navigate("/dashboard");
     } catch (error) {
       console.error(error);
       toast.error("Login failed: " + error.message);
+    } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="login-page">

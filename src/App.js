@@ -1,72 +1,95 @@
-
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import { AuthProvider } from './Context/AuthContext';
-// import ProtectedRoute from './ProtectedRoute';
-import ProtectedRoute from './Context/ProtectedRoute';
-import Login from './Auth/Login';
-// import { AuthContext } from './Context/AuthProvider';
-import Hospital from './Pages/Hospital';
-import Doctor from './Pages/Doctor';
-import Employee from './Pages/Employee';
-import DoctorSchedule from './Pages/DoctorSchedule';
-import Report from './Pages/Report';
-import ForgetPassword from './Auth/ForgetPassword';
-import Dashboard from './Pages/Dashboard';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { AuthProvider } from "./Context/AuthProvider"; 
+// import ProtectedRoute from "./Context/ProtectedRoute";
+import Login from "./Auth/Login";
+import Hospital from "./Pages/Hospital";
+import Doctor from "./Pages/Doctor";
+import Employee from "./Pages/Employee";
+import DoctorSchedule from "./Pages/DoctorSchedule";
+import Report from "./Pages/Report";
+import ForgetPassword from "./Auth/ForgetPassword";
+import Dashboard from "./Pages/Dashboard";
+import Layout from "./Sidebar/Layout";
 
 function App() {
     return (
-        // <AuthProvider>
+        <AuthProvider>
             <Router>
                 <Routes>
-                    {/* Public Route */}
+                    {/* Public Routes */}
                     <Route path="/" element={<Login />} />
-                    <Route path="/forget-password" element={<ForgetPassword />} />
-                    <Route path="/dashboard" element={<Dashboard />} />
-                     
-                    {/* Protected Routes */}
-                    <Route 
-                        path="/hospital" 
+                    <Route path="/forget-password" element={ <ForgetPassword />} />
+                    <Route path="/dashboard" element={<Layout><Dashboard /></Layout>} />
+                    <Route path="/hospital" element={<Layout><Hospital /></Layout>} />
+                    <Route path="/doctor" element={<Layout><Doctor /></Layout>} />
+                    <Route path="/satff" element={<Layout><Employee /></Layout>} />
+                    <Route path="/doctor-schedule" element={<Layout><DoctorSchedule /></Layout>} />
+                    <Route path="/report" element={<Layout><Report/></Layout>} />
+ 
+                    {/* Protected Routes with Layout */}
+                    {/* <Route
+                        path="/dashboard"
                         element={
-                            <ProtectedRoute allowedRoles={['superAdmin', 'admin']}>
-                                <Hospital />
+                            <ProtectedRoute allowedRoles={["admin", "doctor"]}>
+                                <Layout>
+                                    <Dashboard />
+                                </Layout>
                             </ProtectedRoute>
-                        } 
-                    />
-                    <Route 
-                        path="/doctor" 
+                        }
+                    /> */}
+                    {/* <Route
+                        path="/hospital"
                         element={
-                            <ProtectedRoute allowedRoles={['superAdmin', 'admin', 'doctor']}>
-                                <Doctor />
+                            <ProtectedRoute allowedRoles={["admin", "doctor"]}>
+                                <Layout>
+                                    <Hospital />
+                                </Layout>
                             </ProtectedRoute>
-                        } 
+                        }
                     />
-                    <Route 
-                        path="/employee" 
+                    <Route
+                        path="/doctor"
                         element={
-                            <ProtectedRoute allowedRoles={['superAdmin', 'admin', 'employee']}>
-                                <Employee />
+                            <ProtectedRoute allowedRoles={["admin", "doctor"]}>
+                                <Layout>
+                                    <Doctor />
+                                </Layout>
                             </ProtectedRoute>
-                        } 
+                        }
                     />
-                    <Route 
-                        path="/doctor-schedule" 
+                    <Route
+                        path="/employee"
                         element={
-                            <ProtectedRoute allowedRoles={['superAdmin', 'admin', 'doctor']}>
-                                <DoctorSchedule />
+                            <ProtectedRoute allowedRoles={["admin", "employee"]}>
+                                <Layout>
+                                    <Employee />
+                                </Layout>
                             </ProtectedRoute>
-                        } 
+                        }
                     />
-                    <Route 
-                        path="/report" 
+                    <Route
+                        path="/doctor-schedule"
                         element={
-                            <ProtectedRoute allowedRoles={['superAdmin', 'admin']}>
-                                <Report />
+                            <ProtectedRoute allowedRoles={["admin", "doctor"]}>
+                                <Layout>
+                                    <DoctorSchedule />
+                                </Layout>
                             </ProtectedRoute>
-                        } 
+                        }
                     />
+                    <Route
+                        path="/report"
+                        element={
+                            <ProtectedRoute allowedRoles={["admin", "doctor"]}>
+                                <Layout>
+                                    <Report />
+                                </Layout>
+                            </ProtectedRoute>
+                        }
+                    /> */}
                 </Routes>
             </Router>
-        // </AuthProvider>
+        </AuthProvider>
     );
 }
 
