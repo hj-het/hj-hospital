@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
 /* Sidebar Container */
 .sidebar-container {
   width: 215px;
@@ -19,14 +21,15 @@
   justify-content: center;
   margin-bottom: 20px;
 }
-.sidebar-logo h2{
+.sidebar-logo h2 {
   color: #fff;
   text-decoration: none;
-  
 }
 
 .sidebar-menu li {
   width: 100%;
+  font: 400 13px/46px 'Poppins', Arial, Helvetica, sans-serif;
+  color: #767676;
 }
 
 .sidebar-link {
@@ -50,15 +53,13 @@
 }
 
 .sidebar-link.active-link {
-  background-color: #afc5dc9c;
-  color: #fff;
+  background-color: #ffffffd7;
+  color: #767676;
 }
 ul.sidebar-menu {
   text-decoration: none;
   list-style: none;
   width: 100%;
   margin-left: -40px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+
 }

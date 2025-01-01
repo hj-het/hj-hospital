@@ -29,3 +29,308 @@
     justify-content: center;
     align-items: center;
 }
+.specialty-item {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 5px;
+}
+.specialty-item button{
+  background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #333;
+    margin-top: 5px;
+}
+
+.btn-add{
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 15px;
+  margin-right: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px; 
+}
+
+ /* Modal Styling */
+ .modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content-hospital {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+}
+
+.modal-buttons {
+  margin-top: 20px;
+}
+
+.btn-confirm {
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.btn-cancel {
+  background-color: #ccc;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-cancel:hover{
+background-color: #fce3e2;
+color: #333;
+}
+
+.header-right .username {
+font-size: 16px; 
+color: #ffffff; 
+font-weight: 600; 
+margin-right: 15px; 
+}
+
+.header-right .username:hover {
+color: #007bff; 
+transition: color 0.3s ease; 
+}
+
+/* Overall layout for the profile form modal */
+.modal-overlay-profile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.modal-content-profile {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Title for the modal */
+.modal-content-profile h3 {
+  text-align: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Form styling */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.form-main {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: row;
+}
+
+input[type="text"] {
+  padding: 7px;
+}
+input[type="date"] {
+  padding: 7px;
+}
+input[type="email"] {
+  padding: 7px;
+}
+
+input[type="text"]:focus{
+
+        border-color: #47c2ff;
+        outline: none;
+
+}
+
+/* Styling for form input fields */
+.input, select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1rem;
+  color: #333;
+  background-color: #f9f9f9;
+  transition: border 0.3s ease;
+}
+
+/* On focus, input fields will have a stronger border */
+.input:focus, select:focus {
+  border-color: #47c2ff;
+  outline: none;
+}
+
+/* Labels for each input field */
+label {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+/* For the Submit Button */
+.btn-submit {
+  background-color: #47c2ff;
+  padding: 12px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: #007bb5;
+}
+
+.btn-submit:disabled {
+  background-color: #d1d1d1;
+  cursor: not-allowed;
+}
+
+/* Close button for the modal */
+.btn-close-profile {
+  padding: 8px 16px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  text-align: center;
+  display: block;
+  margin: 10px auto;
+  transition: background-color 0.3s ease;
+}
+
+.btn-close-profile:hover {
+  background-color: #c1353d;
+}
+
+/* Input Group Layout */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+/* Modal Styling */
+.modal-content-profile ul {
+  list-style-type: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.modal-content-profile ul li {
+  font-size: 1rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.modal-content-profile ul li strong {
+  color: #47c2ff;
+}
+
+/* Styling for the Hospital Dropdown */
+select {
+  font-size: 1rem;
+  color: #333;
+  background-color: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+select:focus {
+  border-color: #47c2ff;
+  outline: none;
+}
+
+/* Loader styles */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.loader {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+
+.main-hospital-form {
+  display: flex
+;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.close-modal-btn-hospital{
+  position: absolute;
+  left: 39%;
+  top: 22%;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #333;
+}

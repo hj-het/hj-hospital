@@ -29,6 +29,8 @@ const Doctor = () => {
     specialist_in: [],
     hospital_id: "",
     is_active: true,
+    doctor_id:"",
+    login_id:""
   });
   const [loading, setLoading] = useState(false);
   const [specialtyInput, setSpecialtyInput] = useState("");
@@ -73,19 +75,19 @@ const Doctor = () => {
     });
   };
 
-  const handleEdit = () => {
-    console.log("edit");
-  };
+ 
 
   const handleDelete = async (doctorId) => {
     if (!doctorId) {
       console.error("Doctor ID is undefined.");
       return;
     }
-  
-    const confirmDelete = window.confirm("Are you sure you want to delete this doctor?");
+
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this doctor?"
+    );
     if (!confirmDelete) return;
-  
+
     try {
       const response = await fetch(
         `https://hjhelthcare.kisskross.life/api/doctor/delete/${doctorId}`,
@@ -96,22 +98,24 @@ const Doctor = () => {
           },
         }
       );
-  
+
       const result = await response.json();
-  
+
       if (response.ok) {
         toast.success("Doctor deleted successfully!");
-        setDoctors((prevDoctors) => prevDoctors.filter((doc) => doc.id !== doctorId));
+        setDoctors((prevDoctors) =>
+          prevDoctors.filter((doc) => doc.id !== doctorId)
+        );
       } else {
-        toast.error("Failed to delete doctor: " + (result.message || "Unknown error"));
+        toast.error(
+          "Failed to delete doctor: " + (result.message || "Unknown error")
+        );
       }
     } catch (error) {
       console.error("Error deleting doctor:", error);
       toast.error("An error occurred while trying to delete the doctor.");
     }
   };
-  
-  
 
   const handleSpecialtyAdd = () => {
     if (
@@ -133,6 +137,31 @@ const Doctor = () => {
     });
   };
 
+
+  const handleEdit = (doctor) => {
+    console.log("doctor-->", doctor);
+    setFormData({
+      doctor_name: doctor.doctor_name,
+      doctor_image: doctor.doctor_image,
+      gender: doctor.doctor_gender,
+      dob: doctor.doctor_dob,
+      contact_1: doctor.doctor_contact_1,
+      contact_2: doctor.doctor_contact_2,
+      state: doctor.doctor_state,
+      city: doctor.doctor_city,
+      pincode: doctor.doctor_pincode,
+      address: doctor.doctor_address,
+      email: doctor.doctor_email,
+      specialist_in: doctor.doctor_specialist_in,
+      hospital_id: doctor.hospital_id,
+      is_active: doctor.doctor_is_active,
+      doctor_id:doctor.doctor_id,
+      login_id:doctor.login_id
+    });
+    console.log("formData-->", formData);
+    setShowProfileModal(true);
+  };
+
   // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -140,24 +169,56 @@ const Doctor = () => {
 
     const payload = {
       ...formData,
-      login_id,
+      // login_id: login_id || 1,
     };
 
     try {
-      const result = await postRequest("doctor/add", payload);
-      console.log("result-->");
+      let result;
+      if (formData.doctor_id) {
+        
+        // Update doctor
+        result = await fetch(
+          `https://hjhelthcare.kisskross.life/api/doctor/update/${formData.doctor_id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          }
+        );
+        console.log("result-->",result)
+      } else {
+        // Add new doctor
+        result = await postRequest("doctor/add", payload);
+      }
+
+      const response = await result.json();
+
       if (result.ok) {
-        toast.success("Doctor Added Successfully!");
+        toast.success(
+          formData.id
+            ? "Doctor updated successfully!"
+            : "Doctor added successfully!"
+        );
         setShowProfileModal(false);
+
+        // Refresh the doctors list
         const updatedDoctors = await getRequest("doctor/get-all");
         setDoctors(updatedDoctors.data);
       } else {
-        console.log("error");
+        toast.error(
+          `Failed to ${formData.id ? "update" : "add"} doctor: ${
+            response.message || "Unknown error"
+          }`
+        );
       }
     } catch (error) {
       console.error("Error:", error);
       toast.error(
-        "An error occurred while submitting the form. Please try again."
+        `An error occurred while ${
+          formData.id ? "updating" : "adding"
+        } the doctor. Please try again.`
       );
     } finally {
       setLoading(false);
@@ -215,12 +276,12 @@ const Doctor = () => {
         <div className="AddButton">
           <button
             className="profile-button"
-            // onClick={() => setShowProfileModal(true)}
+            onClick={() => setShowProfileModal(true)}
           >
             <ImProfile />
             My-Profile
           </button>
-          <button className="btn-add" onClick={() => setShowProfileModal(true)}>
+          <button className="btn-add">
             <MdAddCircle /> Add Doctor
           </button>
         </div>
