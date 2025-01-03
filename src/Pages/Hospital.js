@@ -24,6 +24,8 @@ const Hospital = () => {
     email: "",
     services: [],
     is_active: true,
+    description: "A leading hospital in the city.",
+   
   });
   const [loading, setLoading] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -48,6 +50,7 @@ const Hospital = () => {
     setFormData({
       ...formData,
       [name]: value,
+     
     });
   };
 
@@ -57,6 +60,8 @@ const Hospital = () => {
       setFormData({
         ...formData,
         services: [...formData.services, serviceInput.trim()],
+         email:"test@gmail.com",
+         pincode:"388215"
       });
       setServiceInput("");
     }
@@ -80,8 +85,10 @@ const Hospital = () => {
         // Update hospital
         await putRequest(`hospital/${formData.id}`, formData);
         toast.success("Hospital updated successfully!");
+        console.log("update hospitall")
       } else {
         // Add new hospital
+        console.log("add hospitall")
         await postRequest("hospital", formData);
         toast.success("Hospital added successfully!");
       }
@@ -103,7 +110,8 @@ const Hospital = () => {
         contact_2: "",
         email: "",
         services: [],
-        
+        description: "A leading hospital in the city.",
+        is_active: true,
       });
     } catch (error) {
       toast.error("Failed to save hospital. Please try again.");
@@ -270,7 +278,24 @@ const Hospital = () => {
               </div>
               <div className="form-hospital-right">
                 
-            
+              <div className="form-group">
+                <label>Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+              </div> 
+              <div className="form-group">
+                <label>Pincode</label>
+                <input
+                  type="number"
+                  name="pincode"
+                  value={formData.pincode}
+                  onChange={handleInputChange}
+                />
+              </div>
               <div className="form-group">
                 <label>City</label>
                 <input

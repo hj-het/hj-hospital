@@ -11,47 +11,87 @@
       z-index: 1000;
     }
     
-    .modal-content {
+    .modal-content-employee {
       background: #fff;
       padding: 20px;
       border-radius: 10px;
-      width: 400px;
+      width: 600px;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     }
     
-    .form-group {
-      margin-bottom: 15px;
+    .modal-content-employee h2{
+      text-align: center;
     }
-    
-    .form-group label {
-      display: block;
-      margin-bottom: 5px;
-      text-align: justify;
+
+    .form-main{
+      display: flex;
+      gap: 30px;
     }
-    
-    .form-group input {
-      /* width: 100%; */
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-    }
-    
-    .btn-submit {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 4px;
-    }
-    
-    .btn-cancel {
-      background-color: #f44336;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      border-radius: 4px;
-      /* margin-left: 10px; */
-    }
-    
+
+    /* General input field styling */
+.input-field {
+  position: relative;
+  width: 100%;
+  margin-bottom: 15px;
+}
+input[type="text"] ,input[type="date"],input[type="number"] ,input[type="select"]{
+  padding: 15px !important;
+}
+
+input[type="date"]::-webkit-input-placeholder {
+  position: relative !important;
+  left: 30px !important;
+  color: rebeccapurple;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+ color: #a59a9a;
+}
+
+.input-field input,
+.input-field select {
+  width: 100%;
+  padding: 10px 40px; /* Space for the icon */
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: #7a7575 !important;
+
+}
+
+/* Placeholder styling */
+.input-field input::placeholder,
+.input-field select::placeholder,.input-field::placeholder {
+  color: #a59a9a;
+  font-size: 14px;
+ position: relative;
+ left: 30px;
+}
+
+/* Icon styling */
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #a9a9a99c;
+  font-size: 18px;
+}
+
+/* Focus effect */
+.input-field input:focus,
+.input-field select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.input-field input:focus::placeholder {
+  color: #007bff;
+}
+
+.employee-modal-button{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
